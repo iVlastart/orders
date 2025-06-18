@@ -13,4 +13,5 @@
         exit;
     }
 
-    
+    $db = new Db("localhost", "orders", "root", "");
+    $orderController = new OrderController($db);
