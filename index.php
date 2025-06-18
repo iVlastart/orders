@@ -5,6 +5,7 @@
     {
         require __DIR__ . "/src/$class.php";
     });
+    header("Content-type: application/json");
 
     $id = $parts[2]??null;
     if($parts[1]!=="order" && $id!==null && $_SERVER["REQUEST_METHOD"]!=="GET")
@@ -15,3 +16,16 @@
 
     $db = new Db("localhost", "orders", "root", "");
     $orderController = new OrderController($db);
+    $results = $orderController->getOrder($id);
+
+    foreach($results as $result)
+    {
+        printf(json_encode([
+            "ID" => $result["ID"],
+            "ProductID" => $result["ProductID"],
+            "DateOfCreation" => $result["DateOfCreation"],
+            "Price" => $result["Price"],
+            "Currency" => $result["Currency"],
+            "Status" => $result["Status"]
+        ]));
+    }
