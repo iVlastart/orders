@@ -7,9 +7,16 @@
 
         }
 
-        public function getConnection():PDO
+        public function getConnection()
         {
             $dsn = "mysql:host={$this->host};dbname={$this->name};charset=utf8";
-            return new PDO($dsn, $this->username, $this->password);
+            try
+            {
+                return new PDO($dsn, $this->username, $this->password);
+            }
+            catch(Exception $ex)
+            {
+                json_encode(["PDO_connErr" => $ex->getMessage()]);
+            }
         }
     }
