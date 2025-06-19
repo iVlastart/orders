@@ -14,7 +14,7 @@
                 product.Name AS Name,
                 product.Is_available AS IsAvailable,
                 myOrder.DateOfCreation,
-                myOrder.Price AS Price,
+                product.Price AS Price,
                 myOrder.Currency AS Currency,
                 myOrder.Status AS Status
             FROM myOrder
